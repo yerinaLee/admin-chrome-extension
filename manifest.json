@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "HappyTuk Admin Tool",
+    "version": "1.0",
+    "description": "CS Team Only User Inquiry Tool",
+    "permissions": [
+        "activeTab"
+    ],
+    "host_permissions": [
+        "http://localhost:8080/*",
+        "https://*.mangot5.com/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Admin Tool"
+    }
+}

@@ -1,0 +1,27 @@
+body { width: 400px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 13px; color: #333; margin: 0; padding: 10px; }
+h2 { margin-top: 0; color: #444; border-bottom: 2px solid #ff6b6b; padding-bottom: 5px; }
+h3 { margin: 15px 0 5px 0; font-size: 14px; color: #555; }
+
+/* 검색 박스 */
+.search-box { display: flex; gap: 5px; margin-bottom: 10px; }
+select { padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+input { flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+button { padding: 5px 15px; background: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+button:hover { background: #ff5252; }
+
+/* 테이블 스타일 */
+table { width: 100%; border-collapse: collapse; margin-bottom: 5px; }
+th, td { border: 1px solid #ddd; padding: 6px; text-align: left; }
+th { background-color: #f2f2f2; font-weight: bold; color: #555; }
+
+/* 기본 정보 테이블 */
+.info-table th { width: 80px; }
+
+/* 스크롤 영역 (로그가 길어질 경우) */
+.table-scroll { max-height: 150px; overflow-y: auto; border: 1px solid #ddd; }
+.table-scroll table { border: none; margin: 0; }
+.table-scroll th { position: sticky; top: 0; background: #eee; }
+
+/* 유틸리티 */
+.hidden { display: none; }
+.error { color: red; font-weight: bold; margin-bottom: 10px; }
