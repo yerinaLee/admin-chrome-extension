@@ -4,8 +4,13 @@
     "version": "1.0",
     "description": "CS Team Only User Inquiry Tool",
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "identity"
     ],
+    "oauth2" : {
+        "client_id": "1077831507536-pvel7pvrvjn05bjaljjfqh3mmih3sd5h.apps.googleusercontent.com",
+        "scopes": ["email", "profile"]
+    },
     "host_permissions": [
         "http://localhost:8080/*",
         "https://*.mangot5.com/*"
