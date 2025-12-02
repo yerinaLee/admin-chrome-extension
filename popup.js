@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         fetchData(query, type);
+        // document.getElementById('searchText').value='';
     });
 
     // 5. 검색목록 관련

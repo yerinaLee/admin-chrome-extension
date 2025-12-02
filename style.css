@@ -1,206 +1,182 @@
-/* 기본 초기화 */
-* { box-sizing: border-box; }
-
-body { 
-    width: 420px; /* 고정 너비 */
-    min-height: 400px; /* 최소 높이 */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    font-size: 13px; 
-    color: #333; 
-    margin: 0; 
-    padding: 15px; 
-    background-color: #f9f9f9;
-    
-    /* 가로 스크롤 방지 */
-    overflow-x: hidden; 
+/* --- Root Variables (Light Mode) --- */
+:root {
+    --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --text-primary: #102a43;
+    --text-secondary: #486581;
+    --accent-color: #334e68; /* 차분한 네이비 블루 */
+    --shadow-glass: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* 컨테이너: 중앙 정렬보다는 위에서부터 자연스럽게 흐르도록 하되,
-   로그인 화면일 때만 중앙 정렬하는 것이 UX상 좋습니다. */
-.container {
-    width: 100%;
+* { box-sizing: border-box; outline: none; }
+
+body {
+    /* 너비 고정: 너무 넓지도 좁지도 않게 */
+    width: 480px; 
+    min-height: 600px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 12px; /* 기본 폰트 살짝 축소 */
+    color: var(--text-primary);
+    margin: 0; padding: 15px; /* 패딩을 줄여서 내부 공간 확보 */
+    background: var(--bg-gradient);
+    overflow-x: hidden;
 }
 
-/* 타이틀 */
-h2 { 
-    margin-top: 0; 
-    color: #444; 
-    border-bottom: 2px solid #3c8dbc; 
-    padding-bottom: 10px; 
-    text-align: center; 
+/* --- Glass Panel --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px; /* 패딩 축소 */
+    margin-bottom: 15px;
+    box-shadow: var(--shadow-glass);
 }
 
-h3 { 
-    margin: 20px 0 8px 0; 
-    font-size: 14px; 
-    color: #555; 
-    border-left: 3px solid #3c8dbc; 
-    padding-left: 8px; 
+/* --- Typography --- */
+h2 {
+    margin: 5px 0 15px 0;
+    font-weight: 700; font-size: 18px;
+    text-align: center; color: #243b53; letter-spacing: -0.5px;
+}
+
+h3 {
+    margin: 0 0 10px 0;
+    font-size: 13px; font-weight: 700; color: var(--accent-color);
+    display: flex; align-items: center; gap: 6px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+h3::before {
+    content: ''; display: block; width: 3px; height: 12px;
+    background: #2cb1bc; /* 청록색 포인트 */
+    border-radius: 2px;
 }
 
 /* 유틸리티 */
 .hidden { display: none !important; }
-.error { color: #d32f2f; font-weight: bold; margin-top: 10px; font-size: 12px; text-align: center;}
-.section { animation: fadeIn 0.3s ease-in-out; }
-
-/* 로그인 화면 (수직 중앙 정렬) */
-#loginSection { 
-    text-align: center; 
-    padding: 40px 0; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px; /* 적당한 높이 */
+.error { 
+    background: #fff5f5; border: 1px solid #fc8181; 
+    color: #c53030; padding: 10px; border-radius: 6px; 
+    text-align: center; margin-top: 10px; font-weight: 600; 
 }
+.section { animation: fadeIn 0.3s ease-out; }
 
-.login-desc { color: #666; margin-bottom: 20px; }
+/* --- Login Section --- */
+#loginSection { height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.login-desc { color: var(--text-secondary); margin-bottom: 15px; font-size: 13px; }
 
-/* 구글 로그인 버튼 */
-.google-btn { 
-    background-color: #4285f4; 
-    color: white; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-size: 14px; 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 10px; 
-    transition: background 0.2s; 
+.google-btn {
+    background: #fff; border: 1px solid #dcdcdc; color: #444;
+    padding: 10px 20px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s;
 }
-.google-btn:hover { background-color: #357ae8; }
-.google-icon { 
-    background: white; 
-    color: #4285f4; 
-    font-weight: bold; 
-    width: 20px; 
-    height: 20px; 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-family: sans-serif; 
-}
+.google-btn:hover { background: #f0f0f0; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.google-icon { font-weight: bold; color: #4285f4; font-size: 16px; }
 
-/* 상단 유틸 (로그아웃 등) */
+/* --- Header Util --- */
 .header-util { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 15px; 
-    font-size: 11px; 
-    color: #888; 
+    display: flex; justify-content: space-between; align-items: center; 
+    margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.05); 
 }
-.logout-link { 
-    background: none; 
-    border: none; 
-    color: #999; 
-    text-decoration: underline; 
-    cursor: pointer; 
-    padding: 0; 
-}
+#userEmailDisplay { color: #334e68; font-weight: 700; font-size: 12px; }
+.logout-link { background: none; border: none; color: #829ab1; cursor: pointer; font-size: 11px; text-decoration: underline; }
+.logout-link:hover { color: #e00; }
 
-/* 검색 박스 */
-.search-box { display: flex; gap: 5px; margin-bottom: 15px; }
-select { padding: 8px; border: 1px solid #ddd; border-radius: 4px; background: white; flex-shrink: 0; }
-input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-width: 0; /* Flexbox overflow 방지 */ }
-button#searchBtn { padding: 8px 15px; background: #3c8dbc; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; flex-shrink: 0; }
+/* --- Search Box --- */
+.search-box { display: flex; gap: 6px; margin-bottom: 15px; }
+select, input {
+    padding: 8px 10px; border: 1px solid #bcccdc; background: rgba(255,255,255,0.9);
+    border-radius: 6px; color: #333; font-size: 12px; transition: 0.2s;
+}
+select:focus, input:focus { background: #fff; border-color: #2cb1bc; outline: none; box-shadow: 0 0 0 2px rgba(44, 177, 188, 0.1); }
+select { width: 100px; cursor: pointer; }
+input { flex: 1; }
+
+button#searchBtn {
+    background: #3c8dbc; color: white; border: none; border-radius: 6px; padding: 0 16px;
+    font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.2s;
+}
 button#searchBtn:hover { background: #367fa9; }
 
-/* 히스토리 섹션 */
-#historySection {
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    margin-bottom: 15px;
+/* --- History Section --- */
+#historySection { 
+    background: rgba(255,255,255,0.5); padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.6); 
 }
+.history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.history-label { font-size: 11px; color: #627d98; font-weight: 600; letter-spacing: 0.5px; }
 
-/* 히스토리 헤더 (Recent Search + Delete All) */
-.history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.history-label { font-size: 11px; color: #888; }
-
-/* Delete All 버튼 스타일 (예쁘게) */
 #deleteSearchHistoryBtn {
-    background: none;
-    border: 1px solid #ffcccc;
-    color: #d32f2f;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
+    background: transparent; border: 1px solid #f86c6b; color: #f86c6b;
+    font-size: 10px; padding: 2px 8px; border-radius: 12px; cursor: pointer; transition: 0.2s;
 }
-#deleteSearchHistoryBtn:hover {
-    background-color: #d32f2f;
-    color: white;
+#deleteSearchHistoryBtn:hover { background: #f86c6b; color: #fff; }
+
+#historyContainer { display: flex; flex-wrap: wrap; gap: 5px; }
+
+/* ⭐ [수정] 히스토리 태그 (끊어짐 방지) */
+.history-item-wrapper {
+    display: inline-flex; align-items: center;
+    background: #fff; border: 1px solid #e1e4e8;
+    border-radius: 4px; padding: 3px 6px;
+    font-size: 11px; color: #486581; cursor: pointer; transition: 0.2s;
+    max-width: 100%; /* 부모 너비 넘지 않게 */
+}
+.history-item-wrapper:hover { border-color: #2cb1bc; color: #102a43; background: #f0fcfd; }
+
+.history-text-item { 
+    margin-right: 6px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 180px; /* 너무 길면 ... 처리 */
+}
+.delete-history-text-item { 
+    color: #9aa5b1; /* font-weight: bold; */ font-size: 12px; 
+    /* padding: 0 2px; */
+    /* margin: 0 0 0 -5px; */
+}
+.delete-history-text-item:hover { color: #e00; }
+
+/* --- Table (Compact) --- */
+.table-scroll {
+    border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; overflow: hidden;
 }
 
-/* 히스토리 아이템 컨테이너 */
-#historyContainer { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 5px; 
-    align-items: center;
+table { width: 100%; border-collapse: collapse; table-layout: fixed; /* 칸 너비 고정 */ }
+
+th {
+    background: #f0f4f8; color: #486581; font-weight: 700;
+    font-size: 11px; padding: 8px 10px; text-align: left;
+    border-bottom: 1px solid #d9e2ec; white-space: nowrap;
 }
 
-/* 히스토리 텍스트 아이템 (검색어) */
-.history-text-item {
-    cursor: pointer;
-    color: #555;
-    font-size: 12px;
-    text-decoration: none;
-    padding: 2px 4px;
-    border-radius: 3px;
-    background-color: #f0f0f0;
-}
-.history-text-item:hover {
-    color: #3c8dbc;
-    background-color: #e8f4fc;
-    text-decoration: none;
+td {
+    padding: 8px 10px; border-bottom: 1px solid #f0f4f8;
+    color: #102a43; font-size: 12px;
+    /* white-space: nowrap; */ /* 줄바꿈 방지 (잘리면 ... 처리) */
+    /* overflow: hidden; text-overflow: ellipsis; */
+
+    white-space: normal; /* 줄바꿈 처리 */
+    word-break: break-all;
+    /* overflow: visible;  */
+    /* text-overflow: clip; */
 }
 
-/* 개별 삭제(X) 버튼 */
-.delete-history-text-item {
-    cursor: pointer;
-    color: #999;
-    font-size: 10px;
-    margin-right: 8px; /* 다음 아이템과의 간격 */
-    margin-left: 1px;
-}
-.delete-history-text-item:hover {
-    color: #ff6b6b;
-    font-weight: bold;
-}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f7f9fa; }
 
+/* User Info Table - 간격 최적화 */
+.info-table th { width: 70px; background: transparent; color: #829ab1; border: none; font-weight: 500; }
+.info-table td { font-weight: 600; border: none; color: #102a43; }
+.info-table tr { border-bottom: 1px solid rgba(0,0,0,0.03); }
 
-/* 테이블 공통 스타일 */
-table { width: 100%; border-collapse: collapse; background: white; table-layout: fixed; /* 셀 너비 고정 */ }
-th, td { 
-    border: 1px solid #eee; 
-    padding: 6px 8px; 
-    text-align: left; 
-    font-size: 12px; 
-    word-break: break-all; /* 긴 텍스트 줄바꿈 */
-}
-th { background-color: #f4f4f4; font-weight: 600; color: #555; }
-.info-table th { width: 80px; }
+#resUserStatus { font-weight: 800; }
 
-/* 스크롤 테이블 (기본) */
-.table-scroll { 
-    /* max-height: 150px;  */
-    overflow-y: auto; 
-    border: 1px solid #eee; 
-    background: white; 
-}
-.table-scroll th { position: sticky; top: 0; z-index: 1; border-top: none; }
+/* 스크롤바 */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: #bcccdc; border-radius: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
