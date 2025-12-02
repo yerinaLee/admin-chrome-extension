@@ -101,16 +101,18 @@ function handleLogout() {
             
             // 입력했던 검색어들도 삭제
             document.getElementById('searchText').value = '';
+
+            // 개별 검색 유저 정보 삭제
+            clearTables();
+            resultArea.classList.add('hidden');
+            errorMsg.classList.add('hidden');
             
-            // 결과 테이블 정보 지우기
+            // 유저검색 히스토리 정보 지우기
             document.getElementById('historyContainer').innerHTML = '';
 
-            clearTables();
-
-            // 검색목록 제거
+            // storage에서 유저 검색목록 제거
             deleteAllSearchHistory();
 
-            console.log("Logged out and token revoked.");
             showLoginScreen();
         });
     }).catch(err => {
@@ -119,8 +121,6 @@ function handleLogout() {
         userToken = null;
         showLoginScreen();
     });
-
-    
 }
 
 // 구글 API로 이메일 가져와서 화면에 표시 (UI용)
@@ -380,6 +380,10 @@ function renderHistoryUI(historyList) {
 /* ====================== UI 관련 메서드 ====================== */
 // 테이블 초기화
 function clearTables() {
+    document.querySelectorAll('#resultArea td').forEach(td => {
+        td.textContent = '';
+    });
+
     document.getElementById('walletBody').innerHTML = '';
     document.getElementById('loginBody').innerHTML = '';
     document.getElementById('blockBody').innerHTML = '';
@@ -394,8 +398,6 @@ function showMainScreen() {
     document.getElementById('loginSection').classList.add('hidden');
     document.getElementById('mainSection').classList.remove('hidden');
 }
-
-
 /* ====================== UI 관련 메서드끝 ====================== */
 
 
@@ -418,5 +420,4 @@ function safeText(str) {
     // 여기서는 간단히 문자열 변환만 하지만, innerHTML에 넣을 땐 주의 필요
     return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-
 /* ====================== 유틸 끝 ====================== */
