@@ -3,20 +3,29 @@
     "name": "HappyTuk Admin Tool",
     "version": "1.0",
     "description": "CS Team Only User Inquiry Tool",
+    "key" : "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcMRALH0blAv7jgfnDyjhoIu7pMgloTRWUtScQLN5GBQ0aJYvdsoWRpPSbm4DiNdUOifiBZFXnhemNWboE+/iEfuPHe6Lfp3Bs+vpg2V1yj893b9FbW3b/X8wYEW+tyHUGRWEArsRubDvISvOrpC1HMNzf29kmQaVVRlodJMB/Va7DQlssThiKc/wQqwaj0hb74UYuX1Q0WVUJlqiEupBGHBmi240XeCorsSIf+naIgcCi7K7X50aKydGV9AvNoHI/BSDeUx5NMxiytBIzFtPnxS6EvgXuqTjaOvjbxP9QBng2YC4ZH+1spH0EbXSQKwnOvfzZi0KegL8YfT4g/3kzAgMBAAECggEAL2H87XrYDXp6q7cO97P9p63NT4Yj73XPEbVg+9m4toIqxt9UDnXtalEh+aDTmQxerZHyhwJSwzFPOFfbhE6SRlOeMzKRJwtLImyDD2VxoWL6O8/6sZ3OPEuqBTUo7Y3t3nCmrEfYhG0mN61xPYVJTRsILosp1Z69kuCMTuIK2bXBZjWWnOu+o/TgJzrjvgLONle8xWNB8jcikOzshAI6NX0mt3SXUMlgxTZzQIdBpO3ZQ4Fqid2N89QLj3IHFazuS70MegUd/C4OQeazyNNd3Ag9Ff2WYEajUtg+uGZC6+mQY37eHcHP0FhKck6IVEMuPqGvqla3huNEYF3dFuCioQKBgQDYCpqoz5f6fes0c79CZw+OL4hK91fdsH01oPKTQRfYmh0fROWFGdT0WGeBExe+79ujGvoECIdtLcfT/KACRrUGh5Ljd+2+1fB6ZdDhV9DC/FAsga+3Atw5z6x47wneTtiDdGqvF1LMyP7sxQsIeOFhBFgZJQVLgzANt0XCy0WX4QKBgQC5FJ4hxi7U8pnqqtVPhyVHn3sVLAUBdqd3yM7DJYImiLDmY1ot9UWa9gTBF+AbhTZTzNB/2eL/F6SqKSLRNBlexG10GqF0IORYa9ez6uJed/FNGoBa9lINWNZQ/sb/Kdl25CEc9XrGuNpGdxZrDPX4Q/hsnlN6ov0pNhP7fvWjkwKBgFNkHHjG0OIm0rBHcW8fOvjmThSpzufKpTobKyc9/AdmzZDxVir/Yp0Ctsky5nqUOVKHKjR+WlABWN3x6I2YX23qzP8ynrmH+TA1tuAUtoddP1E+qeXZm8pQ6EEx+7ws8RQkzr1RImvbtdMM6ApYJp79P0hNavLP66+Pq8TaE73hAoGAJvX0I9/4U9OOGxxDMy6b5mvoGRjfJOO5dTnMbMAkmcAEnTsk7K/JK0nGzm8cOi7ctN9UtNVFN7XecAOg1LFG9fAbqmlAu5WA/CwXiERVytUs8rI1evCHbU/aLcq0UVqZ8LEtV09FvTeEm3jOO1LLJKwKS7M4l4RgDqDXrAWZ6AkCgYEAojLqVwNbsgBJEi4dLB832uN1Yk2+bl4Tct2MYuJvLHSrOcaHCjF0/vD81p4vOVd/qdKz+V80MDEDn+jDUGkmSsoNP1QXK4FV8KyBS141lx4Mao8rL1XccmGT+CoILTm1iC/SnA4lvRLMsXF7FndotFRrv4U5FQV6i6o3qdPJ7Ss=",
     "permissions": [
         "activeTab",
-        "identity"
+        "identity",
+        "sidePanel",
+        "storage"
     ],
     "oauth2" : {
         "client_id": "1077831507536-pvel7pvrvjn05bjaljjfqh3mmih3sd5h.apps.googleusercontent.com",
         "scopes": ["email", "profile"]
     },
     "host_permissions": [
-        "http://localhost:8080/*",
+        "http://127.0.0.1:8080/*",        
         "https://*.mangot5.com/*"
     ],
-    "action": {
-        "default_popup": "popup.html",
-        "default_title": "Admin Tool"
+    "side_panel": {
+        "default_path": "popup.html"
+    },
+    "action": {        
+        "default_title": "Admin Tool",
+        "default_icon":"icons/icon.png"
+    },
+    "background": {
+        "service_worker": "background.js"
     }
 }

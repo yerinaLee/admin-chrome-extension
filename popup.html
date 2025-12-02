@@ -9,85 +9,104 @@
 <div class="container">
     <h2>HappyTuk User Search</h2>
 
-    <div class="search-box">
-        <select id="searchType">
-            <option value="id">UserNo</option>
-            <option value="username">UserName</option>
-        </select>
-        <input type="text" id="searchText" placeholder="Please enter your search term">
-        <button id="searchBtn">Search</button>
+    <div id="loginSection" class="section">
+        <p class="login-desc">Internal account authentication is required.</p>
+        <button id="googleLoginBtn" class="google-btn">
+            <span class="google-icon">G</span>
+            Login with Google
+        </button>
+        <div id="loginErrorMsg" class="error hidden"></div>
     </div>
 
-    <div id="loading" class="hidden">Data loading...</div>
-    <div id="errorMsg" class="hiddenerror"></div>
-
-    <div id="resultArea" class="hidden">
-
-        <h3>User Info</h3>
-        <table class="info-table">
-            <tr>
-                <th>UserNo</th>
-                <td id="resUserNo">-</td>
-                <th>UserName</th>
-                <td id="resUserName">-</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td id="resUserStatus">-</td>
-                <th>LastIP</th>
-                <td id="resUserLastIP">-</td>
-            </tr>
-            <tr>
-                <th>OTP여부</th>
-                <td id="resOtp"colspan="3">-</td>
-            </tr>
-        </table>
-
-        <h3>User Wallet</h3>
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Game</th>
-                        <th>eventCoin</th>
-                        <th>tukCoin</th>
-                        <th>Total</th>
-                        <th>Created</th>
-                    </tr>
-                </thead>
-                <tbody id="walletBody"></tbody>
-            </table>
+    <div id="mainSection" class="section hidden">
+        <div class="header-util">
+            <span id="userEmailDisplay"></span>
+            <button id="logoutBtn" class="logout-link">Logout</button>
         </div>
 
-        <h3>Login history</h3>
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Game</th>
-                        <th>IP</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="loginBody"></tbody>
-            </table>
+        <div class="search-box">
+            <select id="searchType">
+                <option value="id">UserNo</option>
+                <option value="username">UserName</option>
+            </select>
+            <input type="text" id="searchText" placeholder="Please enter your search term">
+            <button id="searchBtn">Search</button>
         </div>
 
+        <div id="historySection" style="margin-bottom: 15px;">
+            <div class="history-header">
+                <span class="history-label">Recent Search</span>
+                <button id="deleteSearchHistoryBtn">Delete All</button>
+            </div>
+            <div id="historyContainer"></div>
+        </div>
 
-        <h3>Game Block history</h3>
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Game</th>
-                        <th>Admin</th>
-                        <th>IP</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="blockBody"></tbody>
+        <div id="loading" class="hidden">Data loading...</div>
+        <div id="errorMsg" class="hiddenerror"></div>
+
+        <div id="resultArea" class="hidden">
+            <h3>User Info</h3>
+            <table class="info-table">
+                <tr>
+                    <th>UserNo</th>
+                    <td id="resUserNo">-</td>
+                    <th>UserName</th>
+                    <td id="resUserName">-</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td id="resUserStatus">-</td>
+                    <th>LastIP</th>
+                    <td id="resUserLastIP">-</td>
+                </tr>
+                <tr>
+                    <th>OTP</th>
+                    <td id="resOtp"colspan="3">-</td>
+                </tr>
             </table>
+            <h3>User Wallet</h3>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>eventCoin</th>
+                            <th>tukCoin</th>
+                            <th>Total</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody id="walletBody"></tbody>
+                </table>
+            </div>
+            <h3>Login history</h3>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:25%">Type</th>
+                            <th style="width:25%">Game</th>
+                            <th style="width:25%">IP</th>
+                            <th style="width:25%">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loginBody"></tbody>
+                </table>
+            </div>
+            <h3>Game Block history</h3>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>Admin</th>
+                            <th>IP</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blockBody"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
