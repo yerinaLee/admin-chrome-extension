@@ -1,6 +1,7 @@
 // 상수: API 주소 (나중에 운영 서버 주소로 변경 필요)
 // const API_URL = "http://127.0.0.1:8080/adminApi/getUserInfo";
-const API_URL = "https://qa-happycode.mangot5.com/adminApi/getUserInfo";
+var prefix = '';
+const API_URL   = "/adminApi/getUserInfo";
 
 let userToken = null; // 구글 토큰 저장
 
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. 검색목록 관련
     chrome.storage.local.get(['searchHistory'], (result) => {
-        if(result.searchHistory){
+        if (result.searchHistory) {
             renderHistoryUI(result.searchHistory);
         }
     });
@@ -61,7 +62,7 @@ function checkLoginStatus() {
         } else {
             userToken = token;
             // 토큰 정보로 이메일 가져오기
-            fetchUserInfo(token); 
+            fetchUserInfo(token);
             showMainScreen();
         }
     });
@@ -99,7 +100,7 @@ function handleLogout() {
             // 3. 로컬 변수 및 UI 초기화
             userToken = null;
             document.getElementById('userEmailDisplay').textContent = ''; // 이메일 표시 지우기
-            
+
             // 입력했던 검색어들도 삭제
             document.getElementById('searchText').value = '';
 
@@ -107,7 +108,7 @@ function handleLogout() {
             clearTables();
             resultArea.classList.add('hidden');
             errorMsg.classList.add('hidden');
-            
+
             // 유저검색 히스토리 정보 지우기
             document.getElementById('historyContainer').innerHTML = '';
 
@@ -163,7 +164,14 @@ async function fetchData(query, type) {
 
     try {
         // API 호출 (GET 방식)
-        const url = `${API_URL}?searchText=${encodeURIComponent(query)}&searchType=${type}`;
+        var env = document.getElementById("chooseEnv").value;
+        if(env == 'LIVE') {
+            prefix = "https://off.mangot5.com"
+        } else {
+            prefix = "https://qa-happycode.mangot5.com"
+        }
+
+        const url = `${prefix}${API_URL}?searchText=${encodeURIComponent(query)}&searchType=${type}`;
 
         // 로컬 테스트용: 토큰이 필요하면 headers에 Authorization 추가
         const response = await fetch(url, {
@@ -211,11 +219,11 @@ function renderData(data) {
     // 1. 기본 정보 바인딩
     document.getElementById('resUserNo').textContent = data.userNo || data.user?.id || '-';
     document.getElementById('resUserName').textContent = data.userName || data.user?.username || '-';
-    
+
     // 데이터 구조에 따라 data.userStatus 또는 data.user.status 확인
-    const statusText = (data.userStatus || data.user?.status) ? "Active" : "Block"; 
+    const statusText = (data.userStatus || data.user?.status) ? "Active" : "Block";
     document.getElementById('resUserStatus').textContent = statusText;
-    
+
     document.getElementById('resUserLastIP').textContent = data.userLastIP || data.user?.lastIp || "-";
     document.getElementById('resOtp').textContent = data.isOtpUser;
 
@@ -284,8 +292,8 @@ function renderData(data) {
 
 
 /* ====================== 유저 검색 목록 관련 메서드 ====================== */
-function addSearchHistory(query, type){
-    chrome.storage.local.get(['searchHistory'], (result) =>{
+function addSearchHistory(query, type) {
+    chrome.storage.local.get(['searchHistory'], (result) => {
         let history = result.searchHistory || []; // 검색목록 없으면 빈배열
 
         // 중복인경우 추가하지않음
@@ -293,40 +301,40 @@ function addSearchHistory(query, type){
             item => item.query === query && item.type === type
         );
 
-        if(exist) return;
+        if (exist) return;
 
         // 중복제거
         // history = history.filter(item => !(item.query === query && item.type === type));
 
         // 목록 맨 앞에 추가
-        history.unshift({query, type});
+        history.unshift({ query, type });
 
         // 최대 저장목록 : 20
-        if(history.length > 20){
+        if (history.length > 20) {
             history.pop();
-        } 
+        }
 
-        chrome.storage.local.set({searchHistory: history}, () => {
+        chrome.storage.local.set({ searchHistory: history }, () => {
             renderHistoryUI(history); // 검색목록 화면 갱신
         })
     })
 }
 
 // 검색목록 제거
-function deleteSearchHistory(query, type){
-    chrome.storage.local.get(['searchHistory'], (result) =>{
+function deleteSearchHistory(query, type) {
+    chrome.storage.local.get(['searchHistory'], (result) => {
         let history = result.searchHistory || []; // 검색목록 없으면 빈배열
 
         // 중복제거
         history = history.filter(item => !(item.query === query && item.type === type));
 
-        chrome.storage.local.set({searchHistory: history}, () => {
+        chrome.storage.local.set({ searchHistory: history }, () => {
             renderHistoryUI(history); // 검색목록 화면 갱신
         })
     })
 }
 
-function deleteAllSearchHistory(){
+function deleteAllSearchHistory() {
     chrome.storage.local.remove('searchHistory', () => {
         document.getElementById('historyContainer').innerHTML = '';
     })
@@ -336,7 +344,7 @@ function renderHistoryUI(historyList) {
     const container = document.getElementById('historyContainer');
     container.innerHTML = '';
 
-    if (historyList.length === 0) return ;
+    if (historyList.length === 0) return;
 
     historyList.forEach(item => {
 
@@ -351,7 +359,7 @@ function renderHistoryUI(historyList) {
         const deleteBtn = document.createElement('span');
         deleteBtn.className = 'delete-history-text-item';
         deleteBtn.textContent = `X`
-        
+
         // 3. 클릭 이벤트 (fetchData 호출)
         textBtn.addEventListener('click', () => {
             document.getElementById('searchText').value = item.query;
