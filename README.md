@@ -1,4 +1,4 @@
-# HappyTuk Admin Tool (GMTool)
+# CS Admin Tool
 
 CS팀 전용 유저 조회 Chrome 확장 프로그램입니다.  
 Google 계정 인증 후 유저 정보, 지갑, 로그인 이력, 게임 블럭 이력을 조회할 수 있습니다.
@@ -57,7 +57,7 @@ Spring / Grails API Server
 ```json
 "host_permissions": [
     "http://127.0.0.1:8080/*",
-    "https://*.mangot5.com/*"
+    "https://*.games.com/*"
 ]
 ```
 
